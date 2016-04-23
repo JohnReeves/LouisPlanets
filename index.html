@@ -1,14 +1,14 @@
 
-<!DOCTYPE html>
-<html>
-<head>
-<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Louis' Planets</title>
-</head>
-<body>
-<svg height="600" width="600">
+<!--
+Created using JS Bin
+http://jsbin.com
+
+Copyright (c) 2016 by anonymous (http://jsbin.com/hayayodera/1/edit)
+
+Released under the MIT license: http://jsbin.mit-license.org
+-->
+<meta name="robots" content="noindex">
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script><script src="https://code.jquery.com/jquery-1.7.2.js"></script><svg height="600" width="600">
   <polygon points="0,0 0,600 600,600 600,0" fill="black" />
 
   <!-- sun -->
@@ -27,11 +27,11 @@
   <circle cx="300" cy="300" r="120" stroke-width="1" stroke="white" fill-opacity="0.0" />
 
   <!-- mars -->
-  <circle cx="300" cy="150" r="10" fill="url(#mars)" />
+  <circle id="Mars" cx="300" cy="150" r="10" fill="url(#mars)" />
   <circle cx="300" cy="300" r="150" stroke-width="1" stroke="white" fill-opacity="0.0" />
 
   <!-- jupiter -->
-  <circle id="jupiter" cx="300" cy="110" r="20" fill="url(#jupiter)" />
+  <circle id="Jupiter" cx="300" cy="110" r="20" fill="url(#jupiter)" />
   <circle cx="300" cy="300" r="190" stroke-width="1" stroke="white" fill-opacity="0.0" />
 
   <!-- saturn -->
@@ -76,54 +76,71 @@
 </svg>
 
 <script id="jsbin-javascript">
-var saturn = 0;
-var earth = 0;
 var venus = 0;
 var mercury = 0;
+var earth = 0;
+var mars = 0;
+var jupiter = 0;
+var saturn = 0;
+
+var SunIsOff = true;
 
 function movePlanets() {
+  mercury = mercury + 0.04 * 365 /88;
+    venus = venus + 0.04 * 365 /244;
+      earth = earth + 0.04 * 365/365;
+        mars = mars + 0.04 * 365 / 687;
+          jupiter = jupiter + 0.04 * 365 / 4329;
+            saturn = saturn + 0.004 * 365 / 10832;
 
-  saturn = saturn + 0.005;
-  earth = earth + 0.04;
-  venus = venus + 0.06;
-  mercury = mercury + 0.02;
+  var mercuryX = calculateXPosition(mercury, 300, 70);
+  var mercuryY = calculateYPosition(mercury, 300, 70);
+  console.log("Mercury x=" + mercuryX + " y = " + mercuryY);
+
+  var venusX = calculateXPosition(venus, 300, 90);
+  var venusY = calculateYPosition(venus, 300, 90);
+  console.log("Venus x=" + venusX + " y = " + venusY);
   
-
-  console.log("moving earth " + earth);
   var earthX = calculateXPosition(earth, 300, 120);
   var earthY = calculateYPosition(earth, 300, 120);
   console.log("earth x=" + earthX + " y = " + earthY);
   
+  var marsX = calculateXPosition(mars, 300, 150);
+  var marsY = calculateYPosition(mars, 300, 150);
+  console.log("Mars x=" + marsX + " y = " + marsY);
+  
+  var jupiterX = calculateXPosition(jupiter, 300, 190);
+  var jupiterY = calculateYPosition(jupiter, 300, 190);
+  console.log("Jupiter x=" + jupiterX + " y = " + jupiterY);
+ 
   var saturnX = calculateXPosition(saturn, 300, 240);
   var saturnY = calculateYPosition(saturn, 300, 240);
   console.log("saturn x=" + saturnX + " y = " + saturnY);
   
-   var SaturnRingX = calculateXPosition(saturn, 300, 240);
+  var SaturnRingX = calculateXPosition(saturn, 300, 240);
   var SaturnRingY = calculateYPosition(saturn, 300, 240);
   console.log("saturnring x=" + SaturnRingX + " y = " + SaturnRingY);
   
-  var VenusX = calculateXPosition(venus, 300, 90);
-  var VenusY = calculateYPosition(venus, 300, 90);
-  console.log("Venus x=" + VenusX + " y = " + VenusY);
-  
-  var MercuryX = calculateXPosition(mercury, 300, 70);
-  var MercuryY = calculateYPosition(mercury, 300, 70);
-  console.log("Mercury x=" + MercuryX + " y = " + MercuryY);
+  $("#Mercury").attr("cx", mercuryX);
+$("#Mercury").attr("cy", mercuryY);
+
+ $("#Venus").attr("cx", venusX);
+$("#Venus").attr("cy", venusY);
 
   $("#Earth").attr("cx", earthX);
 $("#Earth").attr("cy", earthY);
+
+ $("#Mars").attr("cx", marsX);
+$("#Mars").attr("cy", marsY);
+
+ $("#Jupiter").attr("cx", jupiterX);
+$("#Jupiter").attr("cy", jupiterY);
 
  $("#Saturn").attr("cx", saturnX);
 $("#Saturn").attr("cy", saturnY);
 
  $("#SaturnRing").attr("cx", SaturnRingX);
 $("#SaturnRing").attr("cy", SaturnRingY);
-
- $("#Venus").attr("cx", VenusX);
-$("#Venus").attr("cy", VenusY);
-
- $("#Mercury").attr("cx", MercuryX);
-$("#Mercury").attr("cy", MercuryY);
 
 }
 
@@ -140,5 +157,3 @@ function calculateYPosition(degrees, sunY, orbitRadius) {
 setInterval(movePlanets, 2.5);
 
 </script>
-</body>
-</html>
